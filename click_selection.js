@@ -1,36 +1,3 @@
-String.prototype.allReplace = function (obj) {
-  var retStr = this
-  for (var x in obj) {
-    retStr = retStr.replace(new RegExp(x, "g"), obj[x])
-  }
-  return retStr
-}
-
-var generateQuerySelector = function (el) {
-  if (!el) return ""
-  if (el.tagName.toLowerCase() == "html") return "html"
-  var str = el.tagName.toLowerCase()
-  str += el.id != "" ? "#" + el.id : ""
-  if (el.className) {
-    var classes = el.className.split(/\s/)
-    for (var i = 0; i < classes.length; i++) {
-      if (classes[i].trim() != "")
-        str +=
-          "." +
-          classes[i].allReplace({
-            ":": "\\:",
-            "'": "\\'",
-            '"': '\\"',
-            "{": "\\{",
-            "}": "\\}",
-            "#": "\\#",
-            ",": "\\,",
-          })
-    }
-  }
-  return str
-}
-
 var saveToCache = async function (page_data) {
   var cache = await chrome.storage.local.get(["cache"])
   var url = document.location.href
@@ -53,7 +20,7 @@ document.addEventListener(
     e = e || window.event
     var target = e.target,
       text = target.textContent || target.innerText,
-      selector = generateQuerySelector(target),
+      selector = target.tagName.toLowerCase(),
       index = Array.prototype.slice
         .call(document.querySelectorAll(selector))
         .indexOf(target),
