@@ -1,0 +1,27 @@
+{
+  "name": "Click Crawler",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["click_selection.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "ui.html"
+  },
+  "commands": {
+    "append-crawling-result":{
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "Append crawling result of this page to file."
+    }
+  }
+}
