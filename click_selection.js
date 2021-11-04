@@ -28,7 +28,7 @@ var generateQuerySelector = function (el) {
           })
     }
   }
-  return generateQuerySelector(el.parentNode) + " " + str
+  return str
 }
 
 var saveToCache = async function (page_data) {
