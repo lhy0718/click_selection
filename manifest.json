@@ -1,11 +1,9 @@
 {
-  "name": "Click Crawler",
+  "name": "Click Selector and Crawler",
   "version": "1.0.0",
   "manifest_version": 3,
-  "permissions": [
-    "storage",
-    "tabs"
-  ],
+  "permissions": ["storage", "tabs", "notifications"],
+  "icons": { "16": "16.png", "48": "32.png", "128": "128.png" },
   "content_scripts": [
     {
       "matches": ["https://*/*", "http://*/*"],
@@ -14,14 +12,5 @@
   ],
   "action": {
     "default_popup": "ui.html"
-  },
-  "commands": {
-    "append-crawling-result":{
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y",
-        "mac": "Command+Shift+Y"
-      },
-      "description": "Append crawling result of this page to file."
-    }
   }
 }

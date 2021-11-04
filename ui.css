@@ -1,3 +1,16 @@
+html,
+body {
+  height: fit-content;
+}
+
+footer {
+  color: gray;
+}
+
+footer svg {
+  fill: gray;
+}
+
 #crawl-title {
   width: max-content;
   font-size: 15px;
