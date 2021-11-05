@@ -20,6 +20,23 @@
 
 ## 저장파일 포맷
 
+```json
+{
+  "https://example.com": {
+    "p~~0": {
+      "nth-child": 0,
+      "selector": "p",
+      "text": "This is an example."
+    },
+    "p~~1": {
+      "nth-child": 1,
+      "selector": "p",
+      "text": "This is an example 2."
+    }
+  }
+}
+```
+
 ## screenshot
 
 ![screenshot](https://user-images.githubusercontent.com/11364584/140268426-4204629b-bba2-4141-ac0e-0dce2a3e111f.png)
