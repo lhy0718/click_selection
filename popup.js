@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("crawlbtn-delete")
     .addEventListener("click", async () => {
       await Utils.deleteFromTarget("pages", url)
-      await Utils.deleteFromTarget("cache", url)
     })
 
   document

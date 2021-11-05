@@ -19,7 +19,6 @@ chrome.commands.onCommand.addListener(async (command) => {
   switch (command) {
     case "save_this_page":
       let url = (await Utils.getCurrentTab()).url
-      console.log(url)
       await Utils.saveToPages(url)
       break
     default:

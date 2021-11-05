@@ -6,7 +6,7 @@ const saveToCache = async (page_data) => {
   chrome.storage.local.set({ cache: data }, null)
 }
 
-HIGHLIGHT_COLOR = "rgb(252, 247, 94)"
+HIGHLIGHT_COLOR = "rgba(252, 247, 94, 0.5)"
 doc = {}
 chrome.storage.local.get("toggle", (result) => {
   if (result.toggle) saveToCache(doc)
