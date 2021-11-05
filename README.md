@@ -33,6 +33,13 @@
       "selector": "p",
       "text": "This is an example 2."
     }
+  },
+  "https://example.net": {
+    "h1~~0": {
+      "nth-child": 0,
+      "selector": "h1",
+      "text": "This is an example text."
+    }
   }
 }
 ```
