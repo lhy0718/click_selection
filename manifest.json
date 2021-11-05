@@ -2,7 +2,7 @@
   "name": "Click Selector and Crawler",
   "version": "1.0.0",
   "manifest_version": 3,
-  "permissions": ["storage", "tabs", "notifications"],
+  "permissions": ["storage", "tabs"],
   "icons": { "16": "16.png", "48": "32.png", "128": "128.png" },
   "content_scripts": [
     {
@@ -12,5 +12,8 @@
   ],
   "action": {
     "default_popup": "ui.html"
+  },
+  "background": {
+    "service_worker": "background.js"
   }
 }
