@@ -1,24 +1,24 @@
-var saveToCache = async function (page_data) {
-  var cache = await chrome.storage.local.get(["cache"])
-  var url = document.location.href
-  var data = cache.cache ? cache.cache : {}
+const saveToCache = async (page_data) => {
+  let cache = await chrome.storage.local.get(["cache"])
+  let url = document.location.href
+  let data = cache.cache ? cache.cache : {}
   data[url] = page_data
   chrome.storage.local.set({ cache: data }, null)
 }
 
 HIGHLIGHT_COLOR = "rgb(252, 247, 94)"
 doc = {}
-chrome.storage.local.get("toggle", function (result) {
+chrome.storage.local.get("toggle", (result) => {
   if (result.toggle) saveToCache(doc)
 })
 
 document.addEventListener(
   "click",
-  async function (e) {
-    var toggle = await chrome.storage.local.get("toggle")
+  async (e) => {
+    let toggle = await chrome.storage.local.get("toggle")
     if (!toggle.toggle) return
     e = e || window.event
-    var target = e.target,
+    let target = e.target,
       text = target.textContent || target.innerText,
       selector = target.tagName.toLowerCase(),
       index = Array.prototype.slice

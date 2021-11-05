@@ -2,7 +2,8 @@
   "name": "Click Selector and Crawler",
   "version": "1.0.0",
   "manifest_version": 3,
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "tabs", "scripting"],
+  "host_permissions": ["https://*/*", "http://*/*"],
   "icons": { "16": "16.png", "48": "32.png", "128": "128.png" },
   "content_scripts": [
     {
@@ -14,6 +15,16 @@
     "default_popup": "ui.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "commands": {
+    "save_this_page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Save the current page."
+    }
   }
 }
