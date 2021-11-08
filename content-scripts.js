@@ -1,4 +1,4 @@
-const saveToCache = async (page_data) => {
+const updateCache = async (page_data) => {
   let cache = await chrome.storage.local.get(["cache"])
   let url = document.location.href
   let data = cache.cache ? cache.cache : {}
@@ -6,41 +6,78 @@ const saveToCache = async (page_data) => {
   chrome.storage.local.set({ cache: data }, null)
 }
 
+const getAllSiblings = (elem) => {
+  var sibs = []
+  elem = elem.parentNode.firstChild
+  do sibs.push(elem)
+  while ((elem = elem.nextSibling))
+  return sibs
+}
+
 HIGHLIGHT_COLOR = "rgba(252, 247, 94, 0.5)"
 doc = {}
 chrome.storage.local.get("toggle", (result) => {
-  if (result.toggle) saveToCache(doc)
+  if (result.toggle) updateCache(doc)
 })
+
+const getElementInfo = (domElement) => {
+  let _text = domElement.textContent || domElement.innerText,
+    _selector = domElement.tagName.toLowerCase(),
+    _index = Array.prototype.slice
+      .call(document.querySelectorAll(_selector))
+      .indexOf(domElement),
+    _id = _selector + "~~" + _index
+
+  return { text: _text, selector: _selector, index: _index, id: _id }
+}
+
+const addToDoc = (domElement) => {
+  i = getElementInfo(domElement)
+  doc[i.id] = {}
+  doc[i.id]["selector"] = i.selector
+  doc[i.id]["nth-child"] = i.index
+  doc[i.id]["text"] = i.text
+  doc[i.id]["backgroundColor"] = domElement.style.backgroundColor
+  doc[i.id]["textColor"] = domElement.style.color
+  domElement.style.backgroundColor = HIGHLIGHT_COLOR
+  domElement.style.color = "black"
+}
+
+const removeFromDoc = (domElement) => {
+  i = getElementInfo(domElement)
+  domElement.style.backgroundColor = doc[i.id]["backgroundColor"]
+  domElement.style.color = doc[i.id]["textColor"]
+  delete doc[i.id]
+}
 
 document.addEventListener(
   "click",
   async (e) => {
-    let toggle = await chrome.storage.local.get("toggle")
-    if (!toggle.toggle) return
+    if (!(await chrome.storage.local.get("toggle")).toggle) return
+
     e = e || window.event
-    let target = e.target,
-      text = target.textContent || target.innerText,
-      selector = target.tagName.toLowerCase(),
-      index = Array.prototype.slice
-        .call(document.querySelectorAll(selector))
-        .indexOf(target),
-      id = selector + "~~" + index
-    if (id.includes("crawlbtn")) return
-    if (!doc[id]) {
-      doc[id] = {}
-      doc[id]["selector"] = selector
-      doc[id]["nth-child"] = index
-      doc[id]["text"] = text
-      doc[id]["backgroundColor"] = target.style.backgroundColor
-      doc[id]["textColor"] = target.style.color
-      target.style.backgroundColor = HIGHLIGHT_COLOR
-      target.style.color = "black"
+
+    let target = e.target
+    if (!doc[getElementInfo(target).id]) {
+      if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
+        getAllSiblings(target).forEach((sibling) => {
+          if (sibling.tagName && !doc[getElementInfo(sibling).id])
+            addToDoc(sibling)
+        })
+      } else {
+        addToDoc(target)
+      }
     } else {
-      target.style.backgroundColor = doc[id]["backgroundColor"]
-      target.style.color = doc[id]["textColor"]
-      delete doc[id]
+      if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
+        getAllSiblings(target).forEach((sibling) => {
+          if (sibling.tagName && doc[getElementInfo(sibling).id])
+            removeFromDoc(sibling)
+        })
+      } else {
+        removeFromDoc(target)
+      }
     }
-    saveToCache(doc)
+    updateCache(doc)
     console.log(doc)
   },
   false

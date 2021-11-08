@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   ).toggle
 
   document
+    .getElementById("group-selection")
+    .addEventListener("change", (event) => {
+      chrome.storage.local.set({ groupSelection: event.currentTarget.checked })
+    })
+
+  document.getElementById("group-selection").checked = (
+    await chrome.storage.local.get("groupSelection")
+  ).groupSelection
+
+  document
     .getElementById("toggle-crawler")
     .addEventListener("change", (event) => {
       chrome.storage.local.set({ toggle: event.currentTarget.checked })

@@ -72,6 +72,7 @@ footer svg {
   height: var(--toggle-height);
   line-height: var(--toggle-height);
   padding: 8px;
+  font-size: small;
 }
 
 /* switch - the box around the slider */
@@ -114,12 +115,12 @@ footer svg {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked + .slider.blue {
   background-color: #2196f3;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+input:checked + .slider.green {
+  background-color: #2ecc71;
 }
 
 input:checked + .slider:before {
