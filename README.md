@@ -52,6 +52,6 @@
 }
 ```
 
-## screenshot
+## Screenshot
 
-![screenshot](https://user-images.githubusercontent.com/11364584/140268426-4204629b-bba2-4141-ac0e-0dce2a3e111f.png)
+![Screenshot](Screenshot.png)
