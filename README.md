@@ -16,6 +16,16 @@
 
 ## 단축키
 
+### 크롤링 기능 토글
+
+- Windows, Linux: Ctrl+Shift+O
+- MacOS: Command+Shift+O
+
+### 그룹 선택 (sibling 선택) 기능 토글
+
+- Windows, Linux: Ctrl+Shift+E
+- MacOS: Command+Shift+E
+
 ### 현재 페이지의 크롤링 정보를 크롬 로컬 스토리지에 저장
 
 - Windows, Linux: Ctrl+Shift+S
