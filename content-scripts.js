@@ -61,7 +61,11 @@ document.addEventListener(
     if (!doc[getElementInfo(target).id]) {
       if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
         getAllSiblings(target).forEach((sibling) => {
-          if (sibling.tagName && !doc[getElementInfo(sibling).id])
+          if (
+            sibling.tagName &&
+            target.tagName == sibling.tagName &&
+            !doc[getElementInfo(sibling).id]
+          )
             addToDoc(sibling)
         })
       } else {
@@ -70,7 +74,11 @@ document.addEventListener(
     } else {
       if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
         getAllSiblings(target).forEach((sibling) => {
-          if (sibling.tagName && doc[getElementInfo(sibling).id])
+          if (
+            sibling.tagName &&
+            target.tagName == sibling.tagName &&
+            doc[getElementInfo(sibling).id]
+          )
             removeFromDoc(sibling)
         })
       } else {
