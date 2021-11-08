@@ -108,9 +108,14 @@ footer svg {
 
 .toggle-div {
   height: var(--toggle-height);
-  line-height: var(--toggle-height);
+  /* line-height: var(--toggle-height); */
   padding: 8px;
   font-size: small;
+}
+
+.toggle-div span {
+  font-size: xx-small;
+  color: gray;
 }
 
 /* switch - the box around the slider */

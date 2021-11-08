@@ -25,6 +25,20 @@
         "mac": "Command+Shift+S"
       },
       "description": "Save the current page."
+    },
+    "toggle_crawler": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O"
+      },
+      "description": "Toggle the crawler."
+    },
+    "toggle_selection_mode": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Toggle the selection mode."
     }
   }
 }

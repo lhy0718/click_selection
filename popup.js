@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     await chrome.storage.local.get("groupSelection")
   ).groupSelection
 
+  chrome.storage.onChanged.addListener(async (changes, namespace) => {
+    document.getElementById("toggle-crawler").checked = (
+      await chrome.storage.local.get("toggle")
+    ).toggle
+    document.getElementById("group-selection").checked = (
+      await chrome.storage.local.get("groupSelection")
+    ).groupSelection
+  })
+
   document
     .getElementById("toggle-crawler")
     .addEventListener("change", (event) => {

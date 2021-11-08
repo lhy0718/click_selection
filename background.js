@@ -21,6 +21,17 @@ chrome.commands.onCommand.addListener(async (command) => {
       let url = (await Utils.getCurrentTab()).url
       await Utils.saveToPages(url)
       break
+    case "toggle_crawler":
+      chrome.storage.local.set({
+        toggle: !(await chrome.storage.local.get("toggle")).toggle,
+      })
+      break
+    case "toggle_selection_mode":
+      chrome.storage.local.set({
+        groupSelection: !(await chrome.storage.local.get("groupSelection"))
+          .groupSelection,
+      })
+      break
     default:
       break
   }

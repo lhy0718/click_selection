@@ -42,7 +42,7 @@ const addToDoc = (domElement) => {
   doc[i.id]["textColor"] = domElement.style.color
   domElement.style.backgroundColor = HIGHLIGHT_COLOR
   domElement.style.color = "black"
-  domElement.style.border = "1px solid " + HIGHLIGHT_BORDER_COLOR
+  domElement.style.border = "3px solid " + HIGHLIGHT_BORDER_COLOR
 }
 
 const removeFromDoc = (domElement) => {
