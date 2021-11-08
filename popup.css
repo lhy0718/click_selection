@@ -1,3 +1,18 @@
+:root {
+  --toggle-height: 30px;
+  --toggle-width: 50px;
+  --slider-size: 26px;
+  --slider-move: calc(var(--toggle-width) - var(--toggle-height));
+  --color-save: #2ecc71;
+  --color-save-shadow: #26a85c;
+  --color-delete: #c0392b;
+  --color-delete-shadow: #9c2e21;
+  --color-download: #f1c40f;
+  --color-download-shadow: #c7a312;
+  --color-clear: #444;
+  --color-clear-shadow: #444;
+}
+
 html,
 body {
   height: fit-content;
@@ -31,41 +46,64 @@ footer svg {
   padding: 8px;
   transition: 0.15s;
 }
-.crawlbtn:hover {
-  filter: drop-shadow(0 2px 4px gray) brightness(1.05);
-}
-.crawlbtn:active {
-  filter: drop-shadow(0 0 0 gray) brightness(0.95);
-}
+
 .crawlbtn-save {
-  background-color: #2ecc71;
+  background-color: var(--color-save);
 }
+.crawlbtn-save:hover {
+  filter: drop-shadow(0 2px 2px var(--color-save-shadow)) brightness(1.05);
+}
+.crawlbtn-save:active {
+  filter: drop-shadow(0 0 0 var(--color-save-shadow)) brightness(0.95);
+}
+
 .crawlbtn-delete {
-  background-color: #c0392b;
+  background-color: var(--color-delete);
   color: #ecf0f1;
 }
+.crawlbtn-delete:hover {
+  filter: drop-shadow(0 2px 2px var(--color-delete-shadow)) brightness(1.05);
+}
+.crawlbtn-delete:active {
+  filter: drop-shadow(0 0 0 var(--color-delete-shadow)) brightness(0.95);
+}
+
 .crawlbtn-download {
-  background-color: #f1c40f;
+  background-color: var(--color-download);
 }
+.crawlbtn-download:hover {
+  filter: drop-shadow(0 2px 2px var(--color-download-shadow)) brightness(1.05);
+}
+.crawlbtn-download:active {
+  filter: drop-shadow(0 0 0 var(--color-download-shadow)) brightness(0.95);
+}
+
 .crawlbtn-clear {
-  background-color: #444;
+  background-color: var(--color-clear);
   color: #ecf0f1;
 }
+.crawlbtn-clear:hover {
+  filter: drop-shadow(0 2px 2px var(--color-clear-shadow)) brightness(1.05);
+}
+.crawlbtn-clear:active {
+  filter: drop-shadow(0 0 0 var(--color-clear-shadow)) brightness(0.95);
+}
+
 .crawlbtn-cache {
-  background-color: #444;
+  background-color: var(--color-clear);
   color: #ecf0f1;
 }
+.crawlbtn-cache:hover {
+  filter: drop-shadow(0 2px 2px var(--color-clear-shadow)) brightness(1.05);
+}
+.crawlbtn-cache:active {
+  filter: drop-shadow(0 0 0 var(--color-clear-shadow)) brightness(0.95);
+}
+
 .material-icons {
   float: left;
   line-height: 25px;
   margin-right: 10px;
-}
-
-:root {
-  --toggle-height: 30px;
-  --toggle-width: 50px;
-  --slider-size: 26px;
-  --slider-move: calc(var(--toggle-width) - var(--toggle-height));
 }
 
 .toggle-div {
