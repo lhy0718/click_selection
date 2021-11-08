@@ -14,6 +14,18 @@ const getAllSiblings = (elem) => {
   return sibs
 }
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  switch (request.type) {
+    case "alert":
+      alert(request.msg)
+      break
+    case "confirm":
+      confirm(request.msg)
+    default:
+      break
+  }
+})
+
 HIGHLIGHT_COLOR = "rgba(252, 247, 94, 0.5)"
 HIGHLIGHT_BORDER_COLOR = "rgba(200, 200, 94)"
 doc = {}
@@ -61,8 +73,9 @@ document.addEventListener(
     e = e || window.event
 
     let target = e.target
-    if (!doc[getElementInfo(target).id]) {
-      if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
+
+    if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
+      if (!doc[getElementInfo(target).id]) {
         getAllSiblings(target).forEach((sibling) => {
           if (
             sibling.tagName &&
@@ -72,10 +85,6 @@ document.addEventListener(
             addToDoc(sibling)
         })
       } else {
-        addToDoc(target)
-      }
-    } else {
-      if ((await chrome.storage.local.get("groupSelection")).groupSelection) {
         getAllSiblings(target).forEach((sibling) => {
           if (
             sibling.tagName &&
@@ -84,9 +93,10 @@ document.addEventListener(
           )
             removeFromDoc(sibling)
         })
-      } else {
-        removeFromDoc(target)
       }
+    } else {
+      if (!doc[getElementInfo(target).id]) addToDoc(target)
+      else removeFromDoc(target)
     }
     updateCache(doc)
     console.log(doc)

@@ -4,6 +4,13 @@ export const getCurrentTab = async () => {
   return tabs[0]
 }
 
+export const sendAlertMsgToCurrentTab = async (msg) => {
+  chrome.tabs.sendMessage((await getCurrentTab()).id, {
+    type: "alert",
+    msg: msg,
+  })
+}
+
 export const saveToPages = async (url) => {
   let cache = await chrome.storage.local.get(["cache"])
   if (cache.cache && cache.cache[url]) {
@@ -19,20 +26,10 @@ export const saveToPages = async (url) => {
     let data = pages.pages ? pages.pages : {}
     data[url] = pageCache
     chrome.storage.local.set({ pages: data }, null)
-    chrome.scripting.executeScript(
-      {
-        target: { tabId: (await getCurrentTab()).id },
-        func: () => {
-          // A JavaScript function to inject.
-          // This function will be serialized, and then deserialized for injection.
-          // This means that any bound parameters and execution context will be lost.
-          var currentUrl = document.location.href
-          alert("Page has been saved.\nurl: " + currentUrl)
-        },
-      },
-      null
-    )
-  } else alert("There are nothing to save!")
+    sendAlertMsgToCurrentTab("page has been saved. \nurl: " + url)
+  } else {
+    sendAlertMsgToCurrentTab("There are nothing to save!")
+  }
 }
 
 export const deleteFromTarget = async (target, url) => {
@@ -40,8 +37,8 @@ export const deleteFromTarget = async (target, url) => {
   if (targetStorage[target] && targetStorage[target][url]) {
     delete targetStorage[target][url]
     chrome.storage.local.set(targetStorage, null)
-    alert(`${target} has been delete.\nurl: ${url}`)
-  } else alert(`There are nothing to delete!: ${target}`)
+    sendAlertMsgToCurrentTab(target + " has been delete. \nurl: " + url)
+  } else sendAlertMsgToCurrentTab("There are nothing to delete!")
 }
 
 export const download = (content, fileName, contentType) => {
