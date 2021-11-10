@@ -61,16 +61,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
 
   document.getElementById("crawlbtn-clear").addEventListener("click", () => {
-    if (confirm("Pages will be cleared.")) {
-      alert("Pages have been cleared.")
+    if (confirm("CAUTION! - Pages will be cleared.")) {
       chrome.storage.local.remove("pages", null)
+      alert("Pages have been cleared.")
     }
   })
 
   document.getElementById("crawlbtn-cache").addEventListener("click", () => {
     if (confirm("Cache will be cleared.")) {
-      alert("Cache has been cleared.")
       chrome.storage.local.remove("cache", null)
+      alert("Cache has been cleared.")
     }
   })
 })

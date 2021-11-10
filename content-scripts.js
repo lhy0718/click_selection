@@ -3,7 +3,10 @@ const updateCache = async (page_data) => {
   let url = document.location.href
   let data = cache.cache ? cache.cache : {}
   data[url] = page_data
-  chrome.storage.local.set({ cache: data }, null)
+  chrome.storage.local.set({ cache: data }, () => {
+    var error = chrome.runtime.lastError
+    if (error) alert(error)
+  })
 }
 
 const getAllSiblings = (elem) => {

@@ -25,8 +25,11 @@ export const saveToPages = async (url) => {
     let pages = await chrome.storage.local.get(["pages"])
     let data = pages.pages ? pages.pages : {}
     data[url] = pageCache
-    chrome.storage.local.set({ pages: data }, null)
-    sendAlertMsgToCurrentTab("page has been saved. \nurl: " + url)
+    chrome.storage.local.set({ pages: data }, () => {
+      var error = chrome.runtime.lastError
+      if (error) sendAlertMsgToCurrentTab(error)
+      else sendAlertMsgToCurrentTab("page has been saved. \nurl: " + url)
+    })
   } else {
     sendAlertMsgToCurrentTab("There are nothing to save!")
   }
@@ -36,8 +39,11 @@ export const deleteFromTarget = async (target, url) => {
   let targetStorage = await chrome.storage.local.get([target])
   if (targetStorage[target] && targetStorage[target][url]) {
     delete targetStorage[target][url]
-    chrome.storage.local.set(targetStorage, null)
-    sendAlertMsgToCurrentTab(target + " has been delete. \nurl: " + url)
+    chrome.storage.local.set(targetStorage, () => {
+      var error = chrome.runtime.lastError
+      if (error) sendAlertMsgToCurrentTab(error)
+      else sendAlertMsgToCurrentTab(target + " has been delete. \nurl: " + url)
+    })
   } else sendAlertMsgToCurrentTab("There are nothing to delete!")
 }
 
