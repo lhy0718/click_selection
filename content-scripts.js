@@ -5,7 +5,7 @@ const updateCache = async (page_data) => {
   data[url] = page_data
   chrome.storage.local.set({ cache: data }, () => {
     var error = chrome.runtime.lastError
-    if (error) alert(error)
+    if (error) sendAlertMsgToCurrentTab("Crawler error: " + error.message)
   })
 }
 
