@@ -37,7 +37,7 @@ chrome.storage.local.get("toggle", (result) => {
 })
 
 const getElementInfo = (domElement) => {
-  let _text = domElement.textContent || domElement.innerText,
+  let _text = domElement.innerText,
     _selector = domElement.tagName.toLowerCase(),
     _index = Array.prototype.slice
       .call(document.querySelectorAll(_selector))
