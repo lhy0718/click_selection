@@ -2,7 +2,7 @@
 import * as Utils from "./utils.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
-  let url = (await Utils.getCurrentTab()).url
+  let currentURL = (await Utils.getCurrentTab()).url
 
   document.getElementById("crawl-title").addEventListener("click", async () => {
     let local = await chrome.storage.local.get(null)
@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("crawlbtn-save")
     .addEventListener("click", async () => {
-      await Utils.saveToPages(url)
+      await Utils.saveToPages(currentURL)
     })
 
   document
     .getElementById("crawlbtn-delete")
     .addEventListener("click", async () => {
-      await Utils.deleteFromTarget("pages", url)
+      await Utils.deleteFromTarget("pages", currentURL)
     })
 
   document

@@ -1,22 +1,3 @@
-const updateCache = async (page_data) => {
-  let cache = await chrome.storage.local.get(["cache"])
-  let url = document.location.href
-  let data = cache.cache ? cache.cache : {}
-  data[url] = page_data
-  chrome.storage.local.set({ cache: data }, () => {
-    var error = chrome.runtime.lastError
-    if (error) sendAlertMsgToCurrentTab("Crawler error: " + error.message)
-  })
-}
-
-const getAllSiblings = (elem) => {
-  var sibs = []
-  elem = elem.parentNode.firstChild
-  do sibs.push(elem)
-  while ((elem = elem.nextSibling))
-  return sibs
-}
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.type) {
     case "alert":
@@ -30,8 +11,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 })
 
 HIGHLIGHT_COLOR = "rgba(252, 247, 94, 0.5)"
-HIGHLIGHT_BORDER_COLOR = "rgba(200, 200, 94)"
+HIGHLIGHT_TEXT_COLOR = "black"
+HIGHLIGHT_BORDER = "3px solid rgba(200, 200, 94)"
+
 doc = {}
+
+const updateCache = async (page_data) => {
+  let cache = await chrome.storage.local.get(["cache"])
+  let currentURL = document.location.href
+  let data = cache.cache ? cache.cache : {}
+  data[currentURL] = page_data
+  chrome.storage.local.set({ cache: data }, () => {
+    var error = chrome.runtime.lastError
+    if (error) sendAlertMsgToCurrentTab("Crawler error: " + error.message)
+  })
+}
+
 chrome.storage.local.get("toggle", (result) => {
   if (result.toggle) updateCache(doc)
 })
@@ -55,17 +50,26 @@ const addToDoc = (domElement) => {
   doc[i.id]["text"] = i.text
   doc[i.id]["backgroundColor"] = domElement.style.backgroundColor
   doc[i.id]["textColor"] = domElement.style.color
+  doc[i.id]["border"] = domElement.style.border
   domElement.style.backgroundColor = HIGHLIGHT_COLOR
-  domElement.style.color = "black"
-  domElement.style.border = "3px solid " + HIGHLIGHT_BORDER_COLOR
+  domElement.style.color = HIGHLIGHT_TEXT_COLOR
+  domElement.style.border = HIGHLIGHT_BORDER
 }
 
 const removeFromDoc = (domElement) => {
   i = getElementInfo(domElement)
   domElement.style.backgroundColor = doc[i.id]["backgroundColor"]
   domElement.style.color = doc[i.id]["textColor"]
-  domElement.style.border = "none"
+  domElement.style.border = doc[i.id]["border"]
   delete doc[i.id]
+}
+
+const getAllSiblings = (elem) => {
+  var sibs = []
+  elem = elem.parentNode.firstChild
+  do sibs.push(elem)
+  while ((elem = elem.nextSibling))
+  return sibs
 }
 
 document.addEventListener(
