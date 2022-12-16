@@ -36,7 +36,7 @@ Install after enabling developer mode in <chrome://extensions>.
 - Whenever a DOM element on a page is selected, the page's cache is printed to the console.
 - When you click the "Click Selector & Crawler" title in the extension popup, all data stored in Chrome's local storage is displayed in the **popup console**.
 
-## An example of the save file format
+## An Example of the Save File Format
 
 ```json
 {
