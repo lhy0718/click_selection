@@ -1,42 +1,42 @@
 # Click Selector & Crawler
 
-## 설치
+## Installation
 
-<chrome://extensions> 에서 개발자모드 사용설정 후에 설치합니다.
+Install after enabling developer mode in <chrome://extensions>.
 
-## 기능
+## Features
 
-1. 크롤링 기능을 켜고 끌 수 있는 스위치
-1. 그룹 선택 (sibling 선택) 기능을 켜고 끌 수 있는 스위치
-1. 현재 페이지의 크롤링 정보를 크롬 로컬 스토리지에 저장
-1. 현재 페이지의 크롤링 정보와 캐시를 삭제
-1. 현재까지의 모든 페이지 크롤링 목록을 디스크에 저장
-1. 현재까지의 모든 페이지 크롤링 목록을 크롬 로컬 스토리지에서 삭제
-1. 현재까지의 모든 페이지 크롤링 캐시를 크롬 로컬 스토리지에서 삭제
+1. A switch to turn crawling on and off
+1. Switch to turn group selection (sibling selection) on and off
+1. Save the crawled data of current page to chrome local storage
+1. Delete the crawled data and cache of the current page
+1. Download a list of all pages crawled so far to computer
+1. Delete all crawled list so far from chrome local storage
+1. Delete all crawl cache so far from chrome local storage
 
-## 단축키
+## Keyboard Shortcuts
 
-### 크롤링 기능 토글
+### Toggle crawling
 
 - Windows, Linux: Ctrl+Shift+O
 - MacOS: Command+Shift+O
 
-### 그룹 선택 (sibling 선택) 기능 토글
+### Toggle group selection (Sibling selection)
 
 - Windows, Linux: Ctrl+Shift+E
 - MacOS: Command+Shift+E
 
-### 현재 페이지의 크롤링 정보를 크롬 로컬 스토리지에 저장
+### Save crawled elements of current page to chrome local storage
 
 - Windows, Linux: Ctrl+Shift+S
 - MacOS: Command+Shift+S
 
-## 디버깅
+## Debugging
 
-- 페이지 상의 DOM Element를 선택할 때 마다 해당 페이지의 캐시가 콘솔에 출력됨
-- 확장프로그램 팝업의 "Click Selector & Crawler" 제목을 클릭하면 크롬 로컬 스토리지에 저장된 모든 정보가 **팝업 콘솔**에 출력됨
+- Whenever a DOM element on a page is selected, the page's cache is printed to the console.
+- When you click the "Click Selector & Crawler" title in the extension popup, all data stored in Chrome's local storage is displayed in the **popup console**.
 
-## 저장파일 포맷
+## An example of the save file format
 
 ```json
 {
